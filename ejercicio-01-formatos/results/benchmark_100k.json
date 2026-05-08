@@ -1,0 +1,52 @@
+[
+  {
+    "format": "csv",
+    "size_label": "100k",
+    "write_avg_s": 0.3668,
+    "read_full_s": 0.3031,
+    "read_selective_s": 0.0601,
+    "size_bytes": 10363844,
+    "size_mb": 9.88,
+    "peak_memory_mb": 23.99
+  },
+  {
+    "format": "json",
+    "size_label": "100k",
+    "write_avg_s": 0.233,
+    "read_full_s": 3.3496,
+    "read_selective_s": 0.396,
+    "size_bytes": 19763763,
+    "size_mb": 18.85,
+    "peak_memory_mb": 233.63
+  },
+  {
+    "format": "parquet_none",
+    "size_label": "100k",
+    "write_avg_s": 0.0469,
+    "read_full_s": 0.0462,
+    "read_selective_s": 0.005,
+    "size_bytes": 6908392,
+    "size_mb": 6.59,
+    "peak_memory_mb": 7.29
+  },
+  {
+    "format": "parquet_snappy",
+    "size_label": "100k",
+    "write_avg_s": 0.0629,
+    "read_full_s": 0.0189,
+    "read_selective_s": 0.005,
+    "size_bytes": 6010705,
+    "size_mb": 5.73,
+    "peak_memory_mb": 5.86
+  },
+  {
+    "format": "parquet_gzip",
+    "size_label": "100k",
+    "write_avg_s": 1.3355,
+    "read_full_s": 0.0327,
+    "read_selective_s": 0.0072,
+    "size_bytes": 4182957,
+    "size_mb": 3.99,
+    "peak_memory_mb": 4.12
+  }
+]

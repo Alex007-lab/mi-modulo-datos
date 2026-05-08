@@ -1,0 +1,19 @@
+# Datos generados (nunca al repo)
+data/
+ejercicio-01-formatos/data/
+ejercicio-02-consultas/data/
+ejercicio-03-sqlite/data/
+*.csv
+*.parquet
+*.jsonl
+*.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+
+# uv / poetry
+.python-version
