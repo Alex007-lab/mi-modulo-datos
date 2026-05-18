@@ -1,0 +1,112 @@
+[
+  {
+    "pattern": "P1",
+    "description": "Búsqueda por transaction_id exacto",
+    "sla_ms": 10.0,
+    "sqlite_with_idx": {
+      "time_ms": 0.043,
+      "peak_mb": 0.002,
+      "sla_ok": true,
+      "explain": "SEARCH transactions USING INDEX sqlite_autoindex_transactions_1 (transaction_id=?)"
+    },
+    "sqlite_no_idx": {
+      "time_ms": 0.053,
+      "peak_mb": 0.001,
+      "explain": "SEARCH transactions USING INDEX sqlite_autoindex_transactions_1 (transaction_id=?)"
+    },
+    "duckdb": {
+      "time_ms": 98.18,
+      "peak_mb": 0.008
+    },
+    "winner": "SQLite",
+    "speedup_vs_no_idx": 1.2
+  },
+  {
+    "pattern": "P2",
+    "description": "Últimas 20 tx de un user_id",
+    "sla_ms": 50.0,
+    "sqlite_with_idx": {
+      "time_ms": 81.48,
+      "peak_mb": 0.009,
+      "sla_ok": false,
+      "explain": "SCAN transactions\nUSE TEMP B-TREE FOR ORDER BY"
+    },
+    "sqlite_no_idx": {
+      "time_ms": 80.93,
+      "peak_mb": 0.006,
+      "explain": "SCAN transactions\nUSE TEMP B-TREE FOR ORDER BY"
+    },
+    "duckdb": {
+      "time_ms": 105.25,
+      "peak_mb": 0.005
+    },
+    "winner": "SQLite",
+    "speedup_vs_no_idx": 1.0
+  },
+  {
+    "pattern": "P3",
+    "description": "Tx de un user_id en rango de fechas",
+    "sla_ms": 50.0,
+    "sqlite_with_idx": {
+      "time_ms": 80.312,
+      "peak_mb": 0.016,
+      "sla_ok": false,
+      "explain": "SCAN transactions"
+    },
+    "sqlite_no_idx": {
+      "time_ms": 82.725,
+      "peak_mb": 0.013,
+      "explain": "SCAN transactions"
+    },
+    "duckdb": {
+      "time_ms": 100.325,
+      "peak_mb": 0.011
+    },
+    "winner": "SQLite",
+    "speedup_vs_no_idx": 1.0
+  },
+  {
+    "pattern": "P4",
+    "description": "Suma de amount de un user_id, último mes",
+    "sla_ms": 50.0,
+    "sqlite_with_idx": {
+      "time_ms": 81.251,
+      "peak_mb": 0.0,
+      "sla_ok": false,
+      "explain": "SCAN transactions"
+    },
+    "sqlite_no_idx": {
+      "time_ms": 81.51,
+      "peak_mb": 0.0,
+      "explain": "SCAN transactions"
+    },
+    "duckdb": {
+      "time_ms": 28.048,
+      "peak_mb": 0.0
+    },
+    "winner": "DuckDB",
+    "speedup_vs_no_idx": 1.0
+  },
+  {
+    "pattern": "P5",
+    "description": "user_ids de un country_code con > N tx",
+    "sla_ms": 200.0,
+    "sqlite_with_idx": {
+      "time_ms": 127.761,
+      "peak_mb": 0.01,
+      "sla_ok": true,
+      "explain": "SCAN transactions\nUSE TEMP B-TREE FOR GROUP BY\nUSE TEMP B-TREE FOR ORDER BY"
+    },
+    "sqlite_no_idx": {
+      "time_ms": 129.207,
+      "peak_mb": 0.002,
+      "explain": "SCAN transactions\nUSE TEMP B-TREE FOR GROUP BY\nUSE TEMP B-TREE FOR ORDER BY"
+    },
+    "duckdb": {
+      "time_ms": 20.3,
+      "peak_mb": 0.002
+    },
+    "winner": "DuckDB",
+    "speedup_vs_no_idx": 1.0
+  }
+]
