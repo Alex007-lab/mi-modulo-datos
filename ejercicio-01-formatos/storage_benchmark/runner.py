@@ -72,26 +72,41 @@ def _measure_write(writer_fn, df: pd.DataFrame, path: Path) -> float:
     return sum(times) / len(times)
 
 
+READ_REPEATS = 3  # igual que WRITE_REPEATS
+
+
 def _measure_read(reader_fn, path: Path) -> tuple[float, float]:
     """
-    Mide tiempo de lectura y pico de memoria RAM.
-    Devuelve (segundos, peak_mb).
+    Mide tiempo de lectura completa y pico de memoria RAM.
+    Repite READ_REPEATS veces y reporta el promedio de tiempo.
+    El pico de memoria se toma de la primera ejecución (más representativa,
+    sin page cache caliente).
     """
-    tracemalloc.start()
-    start = time.perf_counter()
-    reader_fn(path)
-    elapsed = time.perf_counter() - start
-    _, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
-    peak_mb = peak / (1024 ** 2)
-    return elapsed, peak_mb
+    times = []
+    peak_mb = 0.0
+    for i in range(READ_REPEATS):
+        tracemalloc.start()
+        start = time.perf_counter()
+        reader_fn(path)
+        elapsed = time.perf_counter() - start
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        times.append(elapsed)
+        if i == 0:
+            peak_mb = peak / (1024 ** 2)
+    return sum(times) / len(times), peak_mb
 
 
 def _measure_read_selective(reader_fn, path: Path) -> float:
-    """Mide solo el tiempo de lectura selectiva (sin rastreo de memoria)."""
-    start = time.perf_counter()
-    reader_fn(path)
-    return time.perf_counter() - start
+    """
+    Mide tiempo de lectura selectiva (promedio de READ_REPEATS repeticiones).
+    """
+    times = []
+    for _ in range(READ_REPEATS):
+        start = time.perf_counter()
+        reader_fn(path)
+        times.append(time.perf_counter() - start)
+    return sum(times) / len(times)
 
 
 # ─── Benchmark de un formato ─────────────────────────────────────────────────

@@ -2,9 +2,9 @@
   {
     "format": "csv",
     "size_label": "500k",
-    "write_avg_s": 1.7718,
-    "read_full_s": 1.4106,
-    "read_selective_s": 0.2595,
+    "write_avg_s": 1.6501,
+    "read_full_s": 1.301,
+    "read_selective_s": 0.2442,
     "size_bytes": 51822543,
     "size_mb": 49.42,
     "peak_memory_mb": 119.34
@@ -12,9 +12,9 @@
   {
     "format": "json",
     "size_label": "500k",
-    "write_avg_s": 1.2598,
-    "read_full_s": 17.0632,
-    "read_selective_s": 2.0911,
+    "write_avg_s": 1.2257,
+    "read_full_s": 15.4872,
+    "read_selective_s": 1.8567,
     "size_bytes": 98822462,
     "size_mb": 94.24,
     "peak_memory_mb": 1168.5
@@ -22,9 +22,9 @@
   {
     "format": "parquet_none",
     "size_label": "500k",
-    "write_avg_s": 0.1505,
-    "read_full_s": 0.0701,
-    "read_selective_s": 0.0143,
+    "write_avg_s": 0.1513,
+    "read_full_s": 0.0429,
+    "read_selective_s": 0.0163,
     "size_bytes": 31462863,
     "size_mb": 30.01,
     "peak_memory_mb": 30.66
@@ -32,21 +32,21 @@
   {
     "format": "parquet_snappy",
     "size_label": "500k",
-    "write_avg_s": 0.2312,
-    "read_full_s": 0.0783,
-    "read_selective_s": 0.017,
-    "size_bytes": 27689754,
-    "size_mb": 26.41,
+    "write_avg_s": 0.218,
+    "read_full_s": 0.0648,
+    "read_selective_s": 0.0158,
+    "size_bytes": 27686048,
+    "size_mb": 26.4,
     "peak_memory_mb": 26.54
   },
   {
     "format": "parquet_gzip",
     "size_label": "500k",
-    "write_avg_s": 4.56,
-    "read_full_s": 0.1602,
-    "read_selective_s": 0.0198,
-    "size_bytes": 18912436,
+    "write_avg_s": 4.1525,
+    "read_full_s": 0.1376,
+    "read_selective_s": 0.0199,
+    "size_bytes": 18911501,
     "size_mb": 18.04,
-    "peak_memory_mb": 18.17
+    "peak_memory_mb": 18.16
   }
 ]
