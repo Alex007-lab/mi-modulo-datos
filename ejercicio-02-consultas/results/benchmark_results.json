@@ -4,15 +4,15 @@
       "query_id": "Q1",
       "description": "Conteo por country_code",
       "pandas": {
-        "time_s": 0.0724,
+        "time_s": 0.0323,
         "peak_mb": 16.22
       },
       "duckdb": {
-        "time_s": 0.0596,
+        "time_s": 0.0237,
         "peak_mb": 0.07
       },
       "polars": {
-        "time_s": 0.2268,
+        "time_s": 0.1167,
         "peak_mb": 0.03
       },
       "validation": {
@@ -29,15 +29,15 @@
       "query_id": "Q2",
       "description": "Stats de amount por category",
       "pandas": {
-        "time_s": 0.0776,
+        "time_s": 0.0491,
         "peak_mb": 15.27
       },
       "duckdb": {
-        "time_s": 0.0594,
+        "time_s": 0.0469,
         "peak_mb": 0.14
       },
       "polars": {
-        "time_s": 0.1376,
+        "time_s": 0.1151,
         "peak_mb": 0.01
       },
       "validation": {
@@ -54,15 +54,15 @@
       "query_id": "Q3",
       "description": "Top 10 users por amount",
       "pandas": {
-        "time_s": 0.0584,
+        "time_s": 0.0442,
         "peak_mb": 40.89
       },
       "duckdb": {
-        "time_s": 0.132,
+        "time_s": 0.1025,
         "peak_mb": 0.11
       },
       "polars": {
-        "time_s": 0.1397,
+        "time_s": 0.1061,
         "peak_mb": 0.01
       },
       "validation": {
@@ -79,15 +79,15 @@
       "query_id": "Q4",
       "description": "Transacciones fallidas por hora",
       "pandas": {
-        "time_s": 0.1013,
+        "time_s": 0.0684,
         "peak_mb": 6.89
       },
       "duckdb": {
-        "time_s": 0.0442,
+        "time_s": 0.0333,
         "peak_mb": 0.07
       },
       "polars": {
-        "time_s": 0.1565,
+        "time_s": 0.1011,
         "peak_mb": 0.01
       },
       "validation": {
@@ -104,16 +104,16 @@
       "query_id": "Q5",
       "description": "Amount>500 en MX/CO últimos 30 días",
       "pandas": {
-        "time_s": 0.0814,
+        "time_s": 0.0624,
         "peak_mb": 12.4
       },
       "duckdb": {
-        "time_s": 0.152,
+        "time_s": 0.1257,
         "peak_mb": 1.99
       },
       "polars": {
-        "time_s": 0.1369,
-        "peak_mb": 0.02
+        "time_s": 0.0991,
+        "peak_mb": 0.01
       },
       "validation": {
         "status": "OK",
@@ -129,15 +129,15 @@
       "query_id": "Q6",
       "description": "Top category por country_code",
       "pandas": {
-        "time_s": 0.1025,
+        "time_s": 0.0926,
         "peak_mb": 71.37
       },
       "duckdb": {
-        "time_s": 0.076,
+        "time_s": 0.0624,
         "peak_mb": 0.14
       },
       "polars": {
-        "time_s": 0.1405,
+        "time_s": 0.1234,
         "peak_mb": 0.01
       },
       "validation": {
@@ -154,15 +154,15 @@
       "query_id": "Q7",
       "description": "Usuarios con >5 fallos",
       "pandas": {
-        "time_s": 0.0718,
+        "time_s": 0.0381,
         "peak_mb": 7.61
       },
       "duckdb": {
-        "time_s": 0.0419,
+        "time_s": 0.0339,
         "peak_mb": 0.07
       },
       "polars": {
-        "time_s": 0.1356,
+        "time_s": 0.1017,
         "peak_mb": 0.01
       },
       "validation": {
@@ -179,15 +179,15 @@
       "query_id": "Q8",
       "description": "Promedio diario por category",
       "pandas": {
-        "time_s": 0.8326,
+        "time_s": 0.7011,
         "peak_mb": 117.26
       },
       "duckdb": {
-        "time_s": 0.0971,
+        "time_s": 0.0775,
         "peak_mb": 0.42
       },
       "polars": {
-        "time_s": 0.1715,
+        "time_s": 0.1244,
         "peak_mb": 0.01
       },
       "validation": {
@@ -202,8 +202,8 @@
     }
   ],
   "explain_analyze": {
-    "Q3": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         SELECT             user_id,             SUM(amount)  AS total_amount,             COUNT(*)     AS transaction_count         FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')         GROUP BY user_id         ORDER BY total_amount DESC         LIMIT 10     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.123s              ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           TOP_N           │\n│    ────────────────────   │\n│          Top: 10          │\n│                           │\n│         Order By:         │\n│  sum(read_parquet.amount) │\n│            DESC           │\n│                           │\n│                           │\n│                           │\n│          10 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_decompress_integ│\n│     ral_bigint(#0, 1)     │\n│             #1            │\n│             #2            │\n│                           │\n│                           │\n│                           │\n│        50,000 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│          sum(#1)          │\n│        count_star()       │\n│                           │\n│                           │\n│                           │\n│        50,000 rows        │\n│           0.12s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│          user_id          │\n│           amount          │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_compress_integra│\n│     l_usmallint(#0, 1)    │\n│             #1            │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│          user_id          │\n│           amount          │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.02s           │\n└───────────────────────────┘\n",
-    "Q5": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         WITH max_date AS (             SELECT MAX(timestamp) AS max_ts             FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')         )         SELECT             t.transaction_id,             t.timestamp,             t.user_id,             t.amount,             t.country_code         FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet') t, max_date         WHERE t.amount > 500           AND t.country_code IN ('MX', 'CO')           AND t.timestamp >= max_date.max_ts - INTERVAL '30 days'         ORDER BY t.timestamp     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.116s              ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│             #1            │\n│__internal_decompress_integ│\n│     ral_bigint(#2, 1)     │\n│             #3            │\n│             #4            │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│          ORDER_BY         │\n│    ────────────────────   │\n│     t.\"timestamp\" ASC     │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│             #1            │\n│__internal_compress_integra│\n│     l_usmallint(#2, 1)    │\n│             #3            │\n│             #4            │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│       transaction_id      │\n│         timestamp         │\n│          user_id          │\n│           amount          │\n│        country_code       │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      NESTED_LOOP_JOIN     │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        │\n│ timestamp >= (max_ts - '30│\n│      days'::INTERVAL)     ├──────────────┐\n│                           │              │\n│                           │              │\n│                           │              │\n│         9,883 rows        │              │\n│           0.00s           │              │\n└─────────────┬─────────────┘              │\n┌─────────────┴─────────────┐┌─────────────┴─────────────┐\n│           FILTER          ││      COLUMN_DATA_SCAN     │\n│    ────────────────────   ││                           │\n│ ((country_code = 'MX') OR ││                           │\n│   (country_code = 'CO'))  ││           0.00s           │\n│                           ││                           │\n│                           ││                           │\n│                           ││                           │\n│         9,883 rows        ││           1 row           │\n│           0.00s           ││          (0.00s)          │\n└─────────────┬─────────────┘└───────────────────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│           amount          │\n│        country_code       │\n│         timestamp         │\n│       transaction_id      │\n│          user_id          │\n│                           │\n│          Filters:         │\n│        amount>500.0       │\n│ optional: country_code IN │\n│        ('MX', 'CO')       │\n│                           │\n│      Dynamic Filters:     │\n│ timestamp>='2026-04-08 14 │\n│ :07:45.714499'::TIMESTAMP │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│        73,704 rows        │\n│           0.11s           │\n└───────────────────────────┘\n",
-    "Q6": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         WITH category_stats AS (             SELECT                 country_code,                 category,                 COUNT(*)    AS transaction_count,                 AVG(amount) AS avg_amount             FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')             GROUP BY country_code, category         ),         ranked AS (             SELECT *,                 ROW_NUMBER() OVER (                     PARTITION BY country_code                     ORDER BY transaction_count DESC                 ) AS rn             FROM category_stats         )         SELECT country_code, category, transaction_count, avg_amount         FROM ranked         WHERE rn = 1         ORDER BY country_code     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.0627s             ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│          ORDER_BY         │\n│    ────────────────────   │\n│  ranked.country_code ASC  │\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│           #[9.1]          │\n│           #[9.2]          │\n│           #[9.3]          │\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│ arg_max_nulls_last(#1, #2)│\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        country_code       │\n│ struct_pack(#[9.1], #[9.2]│\n│         , #[9.3])         │\n│     transaction_count     │\n│                           │\n│                           │\n│                           │\n│          150 rows         │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│          Groups:          │\n│             #0            │\n│             #1            │\n│                           │\n│        Aggregates:        │\n│        count_star()       │\n│          avg(#2)          │\n│                           │\n│                           │\n│                           │\n│          150 rows         │\n│           0.04s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        country_code       │\n│          category         │\n│           amount          │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│        country_code       │\n│          category         │\n│           amount          │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.02s           │\n└───────────────────────────┘\n"
+    "Q3": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         SELECT             user_id,             SUM(amount)  AS total_amount,             COUNT(*)     AS transaction_count         FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')         GROUP BY user_id         ORDER BY total_amount DESC         LIMIT 10     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.0883s             ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           TOP_N           │\n│    ────────────────────   │\n│          Top: 10          │\n│                           │\n│         Order By:         │\n│  sum(read_parquet.amount) │\n│            DESC           │\n│                           │\n│                           │\n│                           │\n│          10 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_decompress_integ│\n│     ral_bigint(#0, 1)     │\n│             #1            │\n│             #2            │\n│                           │\n│                           │\n│                           │\n│        50,000 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│          sum(#1)          │\n│        count_star()       │\n│                           │\n│                           │\n│                           │\n│        50,000 rows        │\n│           0.10s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│          user_id          │\n│           amount          │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_compress_integra│\n│     l_usmallint(#0, 1)    │\n│             #1            │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│          user_id          │\n│           amount          │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.01s           │\n└───────────────────────────┘\n",
+    "Q5": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         WITH max_date AS (             SELECT MAX(timestamp) AS max_ts             FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')         )         SELECT             t.transaction_id,             t.timestamp,             t.user_id,             t.amount,             t.country_code         FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet') t, max_date         WHERE t.amount > 500           AND t.country_code IN ('MX', 'CO')           AND t.timestamp >= max_date.max_ts - INTERVAL '30 days'         ORDER BY t.timestamp     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.0912s             ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│             #1            │\n│__internal_decompress_integ│\n│     ral_bigint(#2, 1)     │\n│             #3            │\n│             #4            │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│          ORDER_BY         │\n│    ────────────────────   │\n│     t.\"timestamp\" ASC     │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│             #1            │\n│__internal_compress_integra│\n│     l_usmallint(#2, 1)    │\n│             #3            │\n│             #4            │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│       transaction_id      │\n│         timestamp         │\n│          user_id          │\n│           amount          │\n│        country_code       │\n│                           │\n│                           │\n│                           │\n│         9,883 rows        │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      NESTED_LOOP_JOIN     │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        │\n│ timestamp >= (max_ts - '30│\n│      days'::INTERVAL)     ├──────────────┐\n│                           │              │\n│                           │              │\n│                           │              │\n│         9,883 rows        │              │\n│           0.00s           │              │\n└─────────────┬─────────────┘              │\n┌─────────────┴─────────────┐┌─────────────┴─────────────┐\n│           FILTER          ││      COLUMN_DATA_SCAN     │\n│    ────────────────────   ││                           │\n│ ((country_code = 'MX') OR ││                           │\n│   (country_code = 'CO'))  ││           0.00s           │\n│                           ││                           │\n│                           ││                           │\n│                           ││                           │\n│         9,883 rows        ││           1 row           │\n│           0.00s           ││          (0.00s)          │\n└─────────────┬─────────────┘└───────────────────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│           amount          │\n│        country_code       │\n│         timestamp         │\n│       transaction_id      │\n│          user_id          │\n│                           │\n│          Filters:         │\n│        amount>500.0       │\n│ optional: country_code IN │\n│        ('MX', 'CO')       │\n│                           │\n│      Dynamic Filters:     │\n│ timestamp>='2026-04-18 01 │\n│ :44:07.802696'::TIMESTAMP │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│        73,704 rows        │\n│           0.08s           │\n└───────────────────────────┘\n",
+    "Q6": "┌─────────────────────────────────────┐\n│┌───────────────────────────────────┐│\n││    Query Profiling Information    ││\n│└───────────────────────────────────┘│\n└─────────────────────────────────────┘\n         EXPLAIN ANALYZE         WITH category_stats AS (             SELECT                 country_code,                 category,                 COUNT(*)    AS transaction_count,                 AVG(amount) AS avg_amount             FROM read_parquet('../ejercicio-01-formatos/data/transactions_1m_parquet_snappy.parquet')             GROUP BY country_code, category         ),         ranked AS (             SELECT *,                 ROW_NUMBER() OVER (                     PARTITION BY country_code                     ORDER BY transaction_count DESC                 ) AS rn             FROM category_stats         )         SELECT country_code, category, transaction_count, avg_amount         FROM ranked         WHERE rn = 1         ORDER BY country_code     \n┌────────────────────────────────────────────────┐\n│┌──────────────────────────────────────────────┐│\n││              Total Time: 0.0480s             ││\n│└──────────────────────────────────────────────┘│\n└────────────────────────────────────────────────┘\n┌───────────────────────────┐\n│           QUERY           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│      EXPLAIN_ANALYZE      │\n│    ────────────────────   │\n│                           │\n│           0 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│          ORDER_BY         │\n│    ────────────────────   │\n│  ranked.country_code ASC  │\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│           #[9.1]          │\n│           #[9.2]          │\n│           #[9.3]          │\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│ arg_max_nulls_last(#1, #2)│\n│                           │\n│                           │\n│                           │\n│          15 rows          │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        country_code       │\n│ struct_pack(#[9.1], #[9.2]│\n│         , #[9.3])         │\n│     transaction_count     │\n│                           │\n│                           │\n│                           │\n│          150 rows         │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│          Groups:          │\n│             #0            │\n│             #1            │\n│                           │\n│        Aggregates:        │\n│        count_star()       │\n│          avg(#2)          │\n│                           │\n│                           │\n│                           │\n│          150 rows         │\n│           0.03s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│        country_code       │\n│          category         │\n│           amount          │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.00s           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         TABLE_SCAN        │\n│    ────────────────────   │\n│         Function:         │\n│        READ_PARQUET       │\n│                           │\n│        Projections:       │\n│        country_code       │\n│          category         │\n│           amount          │\n│                           │\n│    Total Files Read: 1    │\n│                           │\n│        Filename(s):       │\n│  ../ejercicio-01-formatos │\n│/data/transactions_1m_parqu│\n│     et_snappy.parquet     │\n│                           │\n│                           │\n│                           │\n│       1,000,000 rows      │\n│           0.01s           │\n└───────────────────────────┘\n"
   }
 }

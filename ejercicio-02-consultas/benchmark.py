@@ -77,17 +77,28 @@ POLARS_FNS = {
 
 # ─── Medición ─────────────────────────────────────────────────────────────────
 
+REPEATS = 3
+
 def measure(fn, *args) -> tuple[pd.DataFrame, float, float]:
     """
-    Ejecuta fn(*args), retorna (resultado, tiempo_s, peak_mb).
-    Usa tracemalloc para el pico de RAM.
+    Ejecuta fn(*args) REPEATS veces.
+    Retorna (resultado, tiempo_promedio_s, peak_mb).
+    El pico de memoria se registra en la primera ejecución.
     """
-    tracemalloc.start()
-    t0 = time.perf_counter()
-    result = fn(*args)
-    elapsed = time.perf_counter() - t0
-    _, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    times = []
+    peak_mb = 0.0
+    result = None
+    for i in range(REPEATS):
+        tracemalloc.start()
+        t0 = time.perf_counter()
+        result = fn(*args)
+        elapsed = time.perf_counter() - t0
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        times.append(elapsed)
+        if i == 0:
+            peak_mb = peak / (1024 ** 2)
+    return result, round(sum(times) / len(times), 4), round(peak_mb, 2)
     return result, round(elapsed, 4), round(peak / 1024**2, 2)
 
 
