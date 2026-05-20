@@ -2,9 +2,9 @@
   "mode": "WAL",
   "chunk_size": 25000,
   "total_rows": 1000000,
-  "total_time_s": 22.393,
-  "rows_per_sec": 44657,
+  "total_time_s": 19.299,
+  "rows_per_sec": 51816,
   "db_size_mb": 208.66,
-  "avg_chunk_s": 0.5137,
-  "max_chunk_s": 0.8013
+  "avg_chunk_s": 0.4458,
+  "max_chunk_s": 0.6928
 }

@@ -1,42 +1,12 @@
 [
   {
-    "format": "csv",
-    "size_label": "1m",
-    "write_avg_s": 3.2003,
-    "read_full_s": 2.4304,
-    "read_selective_s": 0.4571,
-    "size_bytes": 103644181,
-    "size_mb": 98.84,
-    "peak_memory_mb": 238.53
-  },
-  {
-    "format": "parquet_none",
-    "size_label": "1m",
-    "write_avg_s": 0.2481,
-    "read_full_s": 0.0885,
-    "read_selective_s": 0.0262,
-    "size_bytes": 61976156,
-    "size_mb": 59.11,
-    "peak_memory_mb": 59.78
-  },
-  {
     "format": "parquet_snappy",
     "size_label": "1m",
-    "write_avg_s": 0.4113,
-    "read_full_s": 0.1375,
-    "read_selective_s": 0.027,
-    "size_bytes": 54590503,
+    "write_avg_s": 0.4131,
+    "read_full_s": 0.1565,
+    "read_selective_s": 0.0262,
+    "size_bytes": 54592066,
     "size_mb": 52.06,
-    "peak_memory_mb": 52.19
-  },
-  {
-    "format": "parquet_gzip",
-    "size_label": "1m",
-    "write_avg_s": 7.6783,
-    "read_full_s": 0.264,
-    "read_selective_s": 0.0342,
-    "size_bytes": 37129522,
-    "size_mb": 35.41,
-    "peak_memory_mb": 35.54
+    "peak_memory_mb": 52.75
   }
 ]

@@ -17,3 +17,4 @@ __pycache__/
 
 # uv / poetry
 .python-version
+ejercicio-04-sistema/benchmarks/results.json
